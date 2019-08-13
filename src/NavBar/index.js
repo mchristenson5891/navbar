@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { routes } from '../const/routes'
+// import { routes } from '../const/routes'
 import { 
   NavContainer,
   NavRow,
@@ -13,11 +13,22 @@ import {
   Overlay
  } from './style'
 
-const NavBar = () => {
+const NavBar = ({ routes = [] }) => {
+
   const [ isOpen, setIsOpen ] = useState(false)
-  console.log(isOpen)
+
+  window.onresize =() => (window.innerWidth > 900 && isOpen) && setIsOpen(false)
+  //state = {
+  //   isOpen: false
+  // }
+// const setIsOpen = (boolean) =>
+//   this.setState({
+//     isOpen: boolean
+//   })
+  console.log(NavContainer)
   return (
-    <NavContainer color={"white"}>
+    <NavContainer color={"pink"}>
+      <button className='btn'>btn</button>
       <NavRow>
         <NavLeft>
           <p>hello</p>
@@ -32,7 +43,13 @@ const NavBar = () => {
           <Hamburger setIsOpen={setIsOpen} isOpen={isOpen}/>
         </NavRight>
       </NavRow>
-      <Overlay className={isOpen ? "show" : "hide"}/>
+      <Overlay className={isOpen ? "show" : "hide"}>
+      {
+        routes.map(route =>
+          <Link exact to={`/${route}`}>{route}</Link>
+        )
+        }
+      </Overlay>
     </NavContainer> 
   )
 }

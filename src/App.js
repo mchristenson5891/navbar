@@ -7,7 +7,7 @@ import { routes } from './const/routes'
 function App() {
   return (
     <div className="App">
-      <NavBar />
+      <NavBar routes={routes}/>
       <Switch>
         <Route exact path='/' render={() => <div>Root</div>} />
         {
